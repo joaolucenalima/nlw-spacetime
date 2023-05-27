@@ -2,10 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "lint": "eslint src --ext .ts --fix"
+    "dev": "tsx watch src/server.ts"
   },
   "author": "",
   "license": "ISC",

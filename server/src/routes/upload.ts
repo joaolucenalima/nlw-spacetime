@@ -7,9 +7,6 @@ import { promisify } from "node:util";
 const pump = promisify(pipeline);
 
 import { FastifyInstance } from "fastify";
-import { z } from 'zod';
-
-import { prisma } from "../lib/prisma";
 
 export async function uploadRoutes(app: FastifyInstance) {
   app.post('/upload', async (request, reply) => {
@@ -40,6 +37,6 @@ export async function uploadRoutes(app: FastifyInstance) {
     await pump(upload.file, writeStream)
 
     const fullUrl = request.protocol.concat('://').concat(request.hostname)
-    const fileUrl = new URL(`/uploads/${fileName}`, fullUrl)
+    const fileUrl = new URL(`/uploads/${fileName}`, fullUrl).toString()
   })
 } 
