@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { cookies } from "next/headers";
+import { ArrowRight } from "lucide-react";
 
 import { EmptyMemories } from "@/components/EmptyMemories";
 import { api } from "@/lib/api";
@@ -47,7 +47,7 @@ export default async function Home() {
           <div key={memory.id} className="space-y-4">
 
             <time
-              className="flex items-center gap-2 text-sm text-gray-300 -ml-8 before:h-px before:w-5 before:bg-gray-100"
+              className="flex items-center gap-2 text-sm text-gray-400 -ml-8 before:h-px before:w-5 before:bg-gray-400"
             >
               {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
             </time>
@@ -64,7 +64,7 @@ export default async function Home() {
               {memory.excerpt}
             </p>
 
-            <Link href={`/memories/${memory.id}`} className="flex items-center gap-2 text-sm text-gray-200 hover:text-gray-100">
+            <Link href={`/memories/${memory.id}`} className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-300">
               Ler mais
               <ArrowRight className="w-4 h-4" />
             </Link>

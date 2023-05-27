@@ -4,9 +4,8 @@ export function EmptyMemories() {
       <p className="text-center leading-relaxed w-{360px}">
         Você ainda não registrou nenhuma lembrança, comece a{' '}
         <a
-          target='_blank'
           rel="noreferrer"
-          href=""
+          href="/memories/new"
           className="underline hover:text-gray-100"
         >
           criar agora!
