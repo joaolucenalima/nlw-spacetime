@@ -1,9 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import { cookies } from "next/headers";
-import { ArrowRight } from "lucide-react";
 
 import { EmptyMemories } from "@/components/EmptyMemories";
+import ReadMore from "@/components/ReadMore";
 import { api } from "@/lib/api";
 
 import dayjs from "dayjs";
@@ -14,7 +13,7 @@ dayjs.locale(ptBr)
 interface Memory {
   id: string,
   coverUrl: string,
-  excerpt: string,
+  content: string,
   createdAt: string
 }
 
@@ -60,14 +59,13 @@ export default async function Home() {
               className="w-full aspect-video object-cover rounded-lg"
             />
 
-            <p className="text-lg leading-relaxed text-gray-300">
-              {memory.excerpt}
-            </p>
-
-            <Link href={`/memories/${memory.id}`} className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-300">
-              Ler mais
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            {memory.content.length > 140 ? (
+              <ReadMore content={memory.content} />
+            ) : (
+              <p className="text-lg leading-relaxed text-gray-300">
+                {memory.content}
+              </p>
+            )}
 
           </div>
         )

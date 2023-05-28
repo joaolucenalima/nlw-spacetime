@@ -20,11 +20,11 @@ export async function memoriesRoutes(app: FastifyInstance) {
       }
     })
 
-    return memories.map(memory => {
+    return memories.map((memory) => {
       return {
         id: memory.id,
         coverUrl: memory.coverUrl,
-        excerpt: memory.content.substring(0, 115).concat('...')
+        content: memory.content,
       }
     })
   })
@@ -43,7 +43,7 @@ export async function memoriesRoutes(app: FastifyInstance) {
     })
 
     if (!memory.isPublic && memory.userId !== request.user.sub) {
-      return reply.status(401).send()
+      return reply.status(401).send('Acesso não-autorizado.')
     }
 
     return memory
