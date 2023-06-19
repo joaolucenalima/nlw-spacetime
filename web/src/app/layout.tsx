@@ -1,10 +1,10 @@
 import { Roboto_Flex as Roboto, Bai_Jamjuree } from 'next/font/google'
 import { cookies } from 'next/headers'
 
-import { SignIn } from '@/components/SignIn'
-import { Profile } from '@/components/Profile'
-import { MainText } from '@/components/MainText'
-import { Footer } from '@/components/Footer'
+import { SignIn } from '@/components/layout/SignIn'
+import { Profile } from '@/components/layout/Profile'
+import { MainText } from '@/components/layout/MainText'
+import { Footer } from '@/components/layout/Footer'
 
 import './globals.css'
 

@@ -1,9 +1,9 @@
 'use client'
 
-import { FormEvent } from "react";
+import Cookie from 'js-cookie';
 import { Camera } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Cookie from 'js-cookie'
+import { FormEvent } from "react";
 
 import MediaPicker from "@/components/MediaPicker";
 import { api } from "@/lib/api";
@@ -73,7 +73,7 @@ export default function NewMemoryForm() {
 
       </div>
 
-      <MediaPicker />
+      <MediaPicker coverUrl={null} />
 
       <textarea
         name="content"

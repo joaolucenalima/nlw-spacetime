@@ -1,11 +1,11 @@
 'use client'
 
-import { ChangeEvent, useState } from "react"
 import { FileWarning } from "lucide-react"
+import { ChangeEvent, useState } from "react"
 
-export default function MediaPicker() {
+export default function MediaPicker({ coverUrl }: { coverUrl: string | null }) {
 
-  const [preview, setPreview] = useState<string | null>(null)
+  const [preview, setPreview] = useState<string | null>(coverUrl)
   const [uploadError, setUploadError] = useState<string | null>(null)
 
   function onMediaSelected(event: ChangeEvent<HTMLInputElement>) {

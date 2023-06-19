@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import nlwLogo from '../assets/nlw-logo.svg'
+import nlwLogo from '../../assets/nlw-logo.svg'
 import Link from 'next/link'
 
 export function MainText() {

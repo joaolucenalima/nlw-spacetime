@@ -1,7 +1,8 @@
-import Image from "next/image";
 import { cookies } from "next/headers";
+import Image from "next/image";
 
-import { EmptyMemories } from "@/components/EmptyMemories";
+import EditDeleteButtons from "@/components/EditDeleteButtons";
+import EmptyMemories from "@/components/EmptyMemories";
 import ReadMore from "@/components/ReadMore";
 import { api } from "@/lib/api";
 
@@ -45,11 +46,15 @@ export default async function Home() {
         return (
           <div key={memory.id} className="space-y-4">
 
-            <time
-              className="flex items-center gap-2 text-sm text-gray-400 -ml-8 before:h-px before:w-5 before:bg-gray-400"
-            >
-              {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
-            </time>
+            <div className="flex items-center justify-between">
+              <time
+                className="flex items-center gap-2 text-sm text-gray-400 -ml-8 before:h-px before:w-5 before:bg-gray-400"
+              >
+                {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
+              </time>
+
+              <EditDeleteButtons id={memory.id} />
+            </div>
 
             <Image
               src={memory.coverUrl}

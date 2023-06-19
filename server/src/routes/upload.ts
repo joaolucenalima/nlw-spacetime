@@ -1,6 +1,6 @@
-import { extname, resolve } from "node:path";
-import { createWriteStream } from "node:fs";
 import { randomUUID } from "node:crypto";
+import { createWriteStream } from "node:fs";
+import { extname, resolve } from "node:path";
 import { pipeline } from "node:stream";
 import { promisify } from "node:util";
 
@@ -25,7 +25,7 @@ export async function uploadRoutes(app: FastifyInstance) {
     const isValidFileFormat = mimeTypeRegex.test(upload.mimetype)
 
     if (!isValidFileFormat) {
-      return reply.status(400).send()
+      return reply.status(400).send('Formato inválido!')
     }
 
     const fileName = randomUUID().concat(extname(upload.filename))

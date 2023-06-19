@@ -92,7 +92,7 @@ export async function memoriesRoutes(app: FastifyInstance) {
     })
 
     if (memory.userId !== request.user.sub) {
-      return reply.status(401).send()
+      return reply.status(401).send("Você não tem autorização para editar!")
     }
 
     memory = await prisma.memory.update({
