@@ -1,7 +1,7 @@
 'use client'
 
 import Cookie from 'js-cookie';
-import { CalendarDays, Camera } from "lucide-react";
+import { Camera } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
@@ -17,13 +17,13 @@ export default function NewMemoryForm() {
 
     const formData = new FormData(event.currentTarget)
 
-    const file = formData.get('coverUrl')
+    const file = formData.get('coverUrl') as File
 
     console.log(file)
 
     let coverUrl = ''
 
-    if (file) {
+    if (file && file.size > 0) {
       const uploadFormData = new FormData()
       uploadFormData.set('file', file)
 
