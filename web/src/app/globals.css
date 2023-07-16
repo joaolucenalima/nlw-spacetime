@@ -6,3 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+
+input:focus {
+  --tw-ring-offset-color: #18181b;
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(126 34 206 / var(--tw-ring-opacity));
+}

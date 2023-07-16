@@ -15,7 +15,7 @@ interface Memory {
   id: string,
   coverUrl: string,
   content: string,
-  createdAt: string
+  date: string
 }
 
 export default async function Home() {
@@ -50,7 +50,7 @@ export default async function Home() {
               <time
                 className="flex items-center gap-2 text-sm text-gray-400 -ml-8 before:h-px before:w-5 before:bg-gray-400"
               >
-                {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
+                {dayjs(memory.date).format('D[ de ]MMMM[, ]YYYY')}
               </time>
 
               <EditDeleteButtons id={memory.id} />

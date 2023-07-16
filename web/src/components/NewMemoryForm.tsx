@@ -1,7 +1,7 @@
 'use client'
 
 import Cookie from 'js-cookie';
-import { Camera } from "lucide-react";
+import { CalendarDays, Camera } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
@@ -19,6 +19,8 @@ export default function NewMemoryForm() {
 
     const file = formData.get('coverUrl')
 
+    console.log(file)
+
     let coverUrl = ''
 
     if (file) {
@@ -34,7 +36,8 @@ export default function NewMemoryForm() {
     await api.post('/memories', {
       coverUrl,
       content: formData.get('content'),
-      isPublic: formData.get('isPublic')
+      isPublic: formData.get('isPublic'),
+      date: formData.get('date')
     }, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -48,7 +51,6 @@ export default function NewMemoryForm() {
     <form onSubmit={handleCreateMemory} className="flex flex-1 flex-col gap-2">
 
       <div className="flex items-center gap-4">
-
         <label
           htmlFor="media"
           className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-400 hover:text-gray-300"
@@ -59,26 +61,35 @@ export default function NewMemoryForm() {
 
         <label
           htmlFor="isPublic"
-          className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-300"
+          className="flex items-center gap-1.5 text-sm cursor-pointer text-gray-400 hover:text-gray-300"
         >
           <input
             type="checkbox"
             name="isPublic"
             id="isPublic"
             value="true"
-            className="h-4 w-4 rounded border-gray-700 bg-gray-800 text-purple-500 focus:ring-1 focus:ring-offset-zinc-900 focus:ring-purple-700"
+            className="h-4 w-4 rounded border-gray-700 bg-gray-800 cursor-pointer text-purple-500"
           />
           Tornar memória pública
         </label>
-
       </div>
 
       <MediaPicker coverUrl={null} />
 
+      <label htmlFor="date" className='text-sm text-gray-400'>
+        Data da memória:
+        <input
+          type="date"
+          name="date"
+          className='cursor-text rounded ml-2 h-8 border-gray-700 bg-gray-800'
+        />
+      </label>
+
       <textarea
         name="content"
         spellCheck={false}
-        className="w-full flex-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-300 placeholder:text-gray-500 focus:ring-0"
+        autoFocus
+        className="w-full mt-4 flex-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-300 placeholder:text-gray-500 focus:ring-0"
         placeholder="Fique livre para adicionar fotos, vídeos e relatos sobre essa experiência que você quer lembrar para sempre."
       />
 
