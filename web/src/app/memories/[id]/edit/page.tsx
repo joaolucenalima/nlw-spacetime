@@ -53,10 +53,13 @@ export default async function EditMemory({
       coverUrl = uploadResponse.data
     }
 
+    const date = new Date(String(formData.get('date')))
+
     await api.put(`/memories/${id}`, {
       coverUrl,
       content: formData.get('content'),
-      isPublic: formData.get('isPublic')
+      isPublic: formData.get('isPublic'),
+      date: date
     }, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -104,6 +107,16 @@ export default async function EditMemory({
         </div>
 
         <MediaPicker coverUrl={memory.coverUrl} />
+
+        <label htmlFor="date" className='text-sm text-gray-400'>
+          Data da memória:
+          <input
+            type="date"
+            name="date"
+            className='cursor-text rounded ml-2 h-8 border-gray-700 bg-gray-800'
+            defaultValue={memory.createdAt}
+          />
+        </label>
 
         <textarea
           name="content"

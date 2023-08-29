@@ -50,26 +50,30 @@ export async function memoriesRoutes(app: FastifyInstance) {
   })
 
   app.post('/memories', async (request) => {
-    const bodySchema = z.object({
-      content: z.string(),
-      coverUrl: z.string(),
-      date: z.string(),
-      isPublic: z.coerce.boolean().default(false),
-    })
+    try {
+      const bodySchema = z.object({
+        content: z.string(),
+        coverUrl: z.string(),
+        date: z.string(),
+        isPublic: z.coerce.boolean().default(false),
+      })
 
-    const { content, coverUrl, isPublic, date } = bodySchema.parse(request.body)
+      const { content, coverUrl, isPublic, date } = bodySchema.parse(request.body)
 
-    const memory = await prisma.memory.create({
-      data: {
-        content,
-        coverUrl,
-        date,
-        isPublic,
-        userId: request.user.sub,
-      }
-    })
+      const memory = await prisma.memory.create({
+        data: {
+          content,
+          coverUrl,
+          date,
+          isPublic,
+          userId: request.user.sub,
+        }
+      })
 
-    return memory
+      return memory
+    } catch (error) {
+      console.log(error)
+    }
   })
 
   app.put('/memories/:id', async (request, reply) => {
@@ -114,27 +118,31 @@ export async function memoriesRoutes(app: FastifyInstance) {
   })
 
   app.delete('/memories/:id', async (request, reply) => {
-    const paramsSchema = z.object({
-      id: z.string().uuid(),
-    })
+    try {
+      const paramsSchema = z.object({
+        id: z.string().uuid(),
+      })
 
-    const { id } = paramsSchema.parse(request.params)
+      const { id } = paramsSchema.parse(request.params)
 
-    const memory = await prisma.memory.findUniqueOrThrow({
-      where: {
-        id,
+      const memory = await prisma.memory.findUniqueOrThrow({
+        where: {
+          id,
+        }
+      })
+
+      if (memory.userId !== request.user.sub) {
+        return reply.status(401).send()
       }
-    })
 
-    if (memory.userId !== request.user.sub) {
-      return reply.status(401).send()
+      await prisma.memory.delete({
+        where: {
+          id,
+        }
+      })
+    } catch (error) {
+      console.log(error)
     }
-
-    await prisma.memory.delete({
-      where: {
-        id,
-      }
-    })
   })
 
 }

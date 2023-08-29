@@ -19,8 +19,6 @@ export default function NewMemoryForm() {
 
     const file = formData.get('coverUrl') as File
 
-    console.log(file)
-
     let coverUrl = ''
 
     if (file && file.size > 0) {
@@ -33,11 +31,13 @@ export default function NewMemoryForm() {
 
     const token = Cookie.get('token')
 
+    const date = new Date(String(formData.get('date')))
+
     await api.post('/memories', {
       coverUrl,
       content: formData.get('content'),
       isPublic: formData.get('isPublic'),
-      date: formData.get('date')
+      date: date
     }, {
       headers: {
         Authorization: `Bearer ${token}`
